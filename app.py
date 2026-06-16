@@ -77,6 +77,14 @@ elif page == "Providers":
 
     st.title("Providers")
 
+    name = st.text_input("Provider Name")
+
+    if st.button("Add Provider"):
+        cur = conn.cursor()
+        cur.execute("INSERT INTO providers (name) VALUES (?)", (name,))
+        conn.commit()
+        st.success("Provider Added")
+
     df = pd.read_sql("SELECT * FROM providers", conn)
     st.dataframe(df, use_container_width=True)
 
@@ -84,6 +92,14 @@ elif page == "Providers":
 elif page == "Receivers":
 
     st.title("Receivers")
+
+    name = st.text_input("Receiver Name")
+
+    if st.button("Add Receiver"):
+        cur = conn.cursor()
+        cur.execute("INSERT INTO receivers (name) VALUES (?)", (name,))
+        conn.commit()
+        st.success("Receiver Added")
 
     df = pd.read_sql("SELECT * FROM receivers", conn)
     st.dataframe(df, use_container_width=True)
@@ -99,9 +115,9 @@ elif page == "Claims":
 # ---------------- MANAGE FOOD ----------------
 elif page == "Manage Food":
 
-    st.title("Manage Food")
+    st.title("Manage Food Listings")
 
-    action = st.selectbox("Action", ["View", "Add"])
+    action = st.selectbox("Select Action", ["View", "Add"])
 
     if action == "View":
         df = pd.read_sql("SELECT * FROM food", conn)
@@ -155,3 +171,6 @@ elif page == "SQL Analysis":
 
     df = pd.read_sql(sql, conn)
     st.dataframe(df, use_container_width=True)
+
+st.divider()
+st.caption("Developed using Streamlit + SQLite")
