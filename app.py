@@ -250,12 +250,14 @@ elif page=="Manage Food":
             "Add Food"
         ):
 
-            cur=conn.cursor()
+            cur = conn.cursor()
 
-            cur.execute(
-                """
-                INSERT INTO food
-                (Provider_ID,Food_Name,Quantity)
+cur.execute("""
+INSERT INTO food (provider_id, food_name, quantity)
+VALUES (?, ?, ?)
+""", (provider, food, quantity))
+
+conn.commit()
 
                 cur.execute("""
 INSERT INTO food (provider_id, food_name, quantity)
