@@ -15,6 +15,26 @@ CREATE TABLE IF NOT EXISTS providers (
 """)
 
 conn.commit()
+import sqlite3
+
+conn = sqlite3.connect("local_food_wastage.db")
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS providers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+)
+""")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS receivers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+)
+""")
+
+conn.commit()
 st.set_page_config(
     page_title="Food Wastage Management",
     layout="wide"
