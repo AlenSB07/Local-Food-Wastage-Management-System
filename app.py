@@ -1,7 +1,19 @@
 import streamlit as st
 import pandas as pd
 from db_connection import get_connection
+import sqlite3
 
+conn = sqlite3.connect("local_food_wastage.db")
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS providers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+)
+""")
+
+conn.commit()
 st.set_page_config(
     page_title="Food Wastage Management",
     layout="wide"
