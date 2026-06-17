@@ -505,5 +505,5 @@ st.divider()
 st.caption(
 "Developed using Streamlit + SQLite"
 )
-```
+
 
